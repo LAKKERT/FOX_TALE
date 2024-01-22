@@ -1,0 +1,132 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    animation-duration: .5s;
+    user-select: none;
+}
+
+@font-face {
+    font-family: K2D;
+    src: url(../fonts/K2D/K2D-Medium.ttf) format("truetype");
+}
+
+:root {
+    --index: calc(1vw + 1vh);
+}
+
+html, 
+body {
+    height: 100%;
+    font-family: K2D, sans-serif;
+}
+
+body {
+    background-image: url('/static/IMG/varification/gate.png');
+    background-size: cover;
+    background-position: unset;
+}
+
+main {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.code_container {
+    width: 900px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.code_container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.code_container form :not(:first-child){
+    margin-top: 40px;
+}
+
+.hint {
+    text-align: center;
+}
+
+.hint h2{
+    font-size: 38px;
+    color: #F5DEB3;
+    font-weight: bold;
+    letter-spacing: 1px;
+    -webkit-text-stroke: 0.001rem black;
+}
+
+.hint p{
+    font-size: 32px;
+    text-wrap: balance;
+    color: #F5DEB3;
+    letter-spacing: 1px;
+    -webkit-text-stroke: 0.07rem black;
+}
+
+.code_fild {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.varification_code_field {
+    height: 70px;
+    width: 500;
+    border: 0;
+
+    background-color: transparent;
+
+    color: #F5DEB3;
+    -webkit-text-stroke: 0.05rem black;
+
+    font-family: K2D, sans-serif;
+    font-size: 48px;
+    letter-spacing: 15px;
+    text-align: center;
+
+    outline: none;
+}
+
+.varification_code_field[type=text]::placeholder {
+    font-family: K2D, sans-serif;
+    font-size: 48px;
+    letter-spacing: 8px;
+    color: #F5DEB3;
+    -webkit-text-stroke: 0.05rem black;
+    text-align: center;
+}
+
+.submit_button {
+    width: 250px;
+    height: 80px;
+
+    border: 3px solid black;
+    color: #F5DEB3;
+    -webkit-text-stroke: 0.05rem black;
+
+    background-color: transparent;
+
+    font-family: K2D, sans-serif;
+    font-size: 35px;
+    font-weight: 300;
+    letter-spacing: 5px;
+
+    margin: 0 auto;
+
+    cursor: pointer;
+    transition-duration: .5s;
+}
+
+.submit_button:hover {
+    background-color: #8473541c;
+    transition-duration: .2s;
+}

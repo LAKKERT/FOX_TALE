@@ -1,0 +1,312 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static '/registration/registration.css' %}">
+    <script src="{% static 'js/registration/select_style.js' %}"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="layer" class="layer">
+        <div class="registration_container" id="registration_container">
+            <div class="label">
+                <h2 id="label">YOUR ADVENTURE STARTS HERE</h2>
+                <p id="introduction">FIRST, LET’S GET YOUR EMAIL</p>
+            </div>
+            <div class="error_container" id="error_container">
+                <p id="email_error"></p>
+            </div>
+            <form class="registration_form" name="Form" method="POST" autocomplete="off">
+                {% csrf_token %}
+                <div class="email_container" id="email_container">
+                    {% if email_error_message %}
+                        <p id="email_error">{{ email_error_message }}</p>
+                    {% endif %}
+                    {{ form.email }}
+                </div>
+                <div class="birth_day" id="birth_day">
+                    {{ form.month }}
+                    {{ form.day }}
+                    {{ form.year }}
+                </div>
+                <div class="user_info" id="user_info">
+                    {% if login_error_message %}
+                        <p id="login_error">{{ login_error_message }}</p>
+                    {% endif %}
+                    {{ form.username }}
+                    {{ form.password1 }}
+                    {{ form.password2 }}
+                </div>
+                <div style="display: none;" class="full_info_container" id="full_info_container">
+                    <div class="full_info">
+                        <p>Your Email:&nbsp; <p id="final_email"></p></p>
+                    </div>
+                    <div class="full_info">
+                        <p>Your Username:&nbsp; <p id="final_login"></p></p>
+                    </div>
+                    <div class="full_info">
+                        <p>Your birthday:&nbsp; 
+                            <p id="final_born_month">&nbsp;</p><p>&nbsp;</p>
+                            <p id="final_born_day">&nbsp;</p><p>&nbsp;</p>
+                            <p id="final_born_year">&nbsp;</p><p>&nbsp;</p>
+                        </p>
+                    </div>
+                </div>
+
+                <button style="display: none;" class="next_btn" type="submit" id="submit_btn">READY</button>
+            </form>
+
+            <div class="button_container">
+                <!-- <button onclick="validateEmail()" class="next_btn">START!</button> -->
+
+                <button onclick="NextSlideButton()" class="next_btn" id="button1">START</button>
+                <button style="display: none;" onclick="NextSlideButton2()" class="next_btn" id="button2">NEXT</button>
+                <button style="display: none;" onclick="NextSlideButton3()" class="next_btn" id="button3">NEXT</button>
+
+            </div>
+            <div class="registered" id="registered">
+                <p>ALREADY REGISTERED?</p>
+                <a href="{% url 'login' %}">CLICK TO LOG IN</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var emails = [ 
+            {% for email in emails %}
+                "{{ email.email }}",
+            {% endfor %}
+        ];
+
+        var usernames = [
+            {% for user in users %}
+                '{{ user.username }}',
+            {% endfor %}
+        ]
+
+
+        var registration_container = document.getElementById('registration_container');
+        var email_container = document.getElementById('email_container');
+        var birth_day_container = document.getElementById('birth_day');
+        var user_info_container = document.getElementById('user_info');
+        var full_info_container = document.getElementById('full_info_container');
+        user_info_container.style.display = 'none';
+        birth_day_container.style.display = 'none';
+
+        var label = document.getElementById('label');
+        var introduction = document.getElementById('introduction');
+        var error_container = document.getElementById('error_container');
+        var registered = document.getElementById('registered');
+        var error = document.getElementById('email_error');
+        // var email_field = document.forms["Form"]["email"].value;
+
+        var button1 = document.getElementById('button1');
+        var button2 = document.getElementById('button2');
+        var button3 = document.getElementById('button3');
+        var submit_btn = document.getElementById('submit_btn');
+
+        var select_month = document.getElementById("select_month");
+        var options = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+        // var count = 1;
+        let html = "";
+        for (let i = 0; i < options.length; i++) {
+            // html += `<option value="$options[i]">${options[i]}</option>`;
+            html += `<option value="${options[i]}">${options[i]}</option>`;
+            // count += 1;
+        }
+        select_month.innerHTML = html;
+        let int_html = "";
+
+        var select_day = document.getElementById("select_day");
+        var count_days = 0;
+        while (count_days != 31){
+            count_days++;
+            int_html += `<option value="${count_days}">${count_days}</option>`;
+        }
+        select_day.innerHTML = int_html;
+
+        current_year = new Date().getFullYear();
+        var select_year = document.getElementById("select_year");
+        var last_date = current_year - 100;
+        let year_html = "";
+        while (current_year != last_date) {
+            year_html += `<option value="${current_year}"> ${current_year} </option>`;
+            current_year -= 1;
+        }
+        select_year.innerHTML = year_html;
+
+        function NextSlideButton() {
+            var email_field = document.forms["Form"]["email"].value;
+            check_email_exist = false;
+            for (i = 0;i != emails.length; i++) {
+                console.log(email_field);  
+                if (email_field == emails[i]) {
+                    console.log(emails[i]);
+                    check_email_exist = true;
+                    break;
+                }else{
+                    check_email_exist = false;
+                }
+            }
+            if (email_field == null || email_field == "") {
+                error.innerHTML = "Please enter your email address";
+            }
+            else if (email_field != null) {
+                const emailInput = document.getElementById('email');
+                const isValid = validate(emailInput.value);
+                console.log(isValid);
+
+                if (isValid) {
+                    if (check_email_exist == false) {
+                        console.log('Email валидный');
+                        var background = document.getElementById('layer');                        
+                        background.classList.add('appearance');
+
+                        setTimeout(function() {
+                            document.getElementById('layer').style.backgroundImage = "url('/static/IMG/login/second_slide.jpg')";
+                            background.classList.remove("appearance");
+                            error.innerHTML = "";
+                            error_container.style.display = 'none';
+                            label.innerHTML = "WHEN WERE YOU BORN?";
+                            // label.style.fontSize = "calc(var(--index) * 1.8)";
+                            introduction.style.display = 'none';
+                            registered.style.display = 'none';
+                            email_container.style.display = 'none';
+                            birth_day_container.style.display = 'flex';
+    
+                            button1.style.display = 'none';
+                            button2.style.display = 'block';
+                        }, 1000);
+                    }else {
+                        error.innerHTML = "Еmail already exists";
+                    }
+                } else {
+                    error.innerHTML = "Please enter a valid email address";
+                }
+
+                function validate(email){
+                    const regex = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;
+                    return regex.test(email);
+                }
+            }
+        }
+
+        function NextSlideButton2() {
+            current_year = new Date().getFullYear();
+            var selection = document.getElementById("select_year");
+            var age_restriction = current_year - 16;
+            console.log(selection.value);
+            console.log(age_restriction);
+            if (selection.value <= age_restriction) {
+                var background = document.getElementById('layer');                        
+                background.classList.add('appearance');
+                setTimeout(function(){
+                    document.getElementById('layer').style.backgroundImage = "url('/static/IMG/login/fox_rd.png')";
+                    background.classList.remove("appearance");
+                    error.innerHTML = "";
+                    error_container.style.display = 'none';
+                    label.innerHTML = "YOUR INFO";
+                    // label.style.fontSize = "calc(var(--index) * 1.8)";
+                    birth_day_container.style.display = 'none';
+                    user_info_container.style.display = 'flex';
+                    button2.style.display = 'none';
+                    button3.style.display = 'block';
+                }, 1000);
+            }
+            else {
+                error.innerHTML = "you're too young";
+                error_container.style.display = 'flex';
+            }
+        }
+
+        function NextSlideButton3() {
+            error_container.style.display = 'block';
+            var pas1 = document.getElementById('password1_id').value;
+            var pas2 = document.getElementById('password2_id').value;
+            var login_value = document.getElementById('username_id').value;
+            var check_exist_username = false;
+
+            for (i = 0;i != usernames.length ;i++){
+                if(login_value == usernames[i]){
+                    check_exist_username = true;
+                    break;
+                }else{
+                    check_exist_username = false;
+                }
+            }
+
+            if (login_value == null || login_value == ''){
+                error.innerHTML = "Please fill in all fields";
+                error_container.style.display = 'flex';
+            }else if (pas1 == null || pas1 == '') {
+                error.innerHTML = "Please fill in all fields";
+                error_container.style.display = 'flex';
+            }else if (pas2 == null || pas2 == ''){
+                error.innerHTML = "Please fill in all fields";
+                error_container.style.display = 'flex';
+            }else{
+                const loginInput = document.getElementById('username_id');
+                const isValid = validateInput(loginInput.value);
+                console.log(isValid);
+                if (isValid) {
+                    if(check_exist_username == false){
+                        console.log('login valid');
+                        if (pas1 != pas2) {
+                            error.innerHTML = "passwords don't match";
+                            error_container.style.display = 'flex';
+                        }else{
+                            var background = document.getElementById('layer');                        
+                            background.classList.add('appearance');
+                            setTimeout(function(){
+                                document.getElementById('layer').style.backgroundImage = "url('/static/IMG/login/fox_and_ord.png')";
+                                background.classList.remove("appearance");
+
+                                user_info_container.style.display = 'none';
+                                full_info_container.style.display = 'flex';
+                    
+                                var email = document.getElementById('final_email');
+                                var login = document.getElementById('final_login');
+                                var final_born_month = document.getElementById('final_born_month');
+                                var final_born_day = document.getElementById('final_born_day');
+                                var final_born_year = document.getElementById('final_born_year');
+            
+                                error.innerHTML = "";
+                                error_container.style.display = 'none';
+                                label.innerHTML = "CHECH THE INFORMATION, IS EVERYTHING OK?";
+                                
+                                email.innerHTML = document.getElementById('email').value;
+                                login.innerHTML = document.getElementById('username_id').value;
+            
+                                final_born_month.innerHTML = document.getElementById('select_month').value;
+                                final_born_day.innerHTML = document.getElementById('select_day').value;
+                                final_born_year.innerHTML = document.getElementById('select_year').value;
+            
+                                button3.style.display = 'none';
+                                submit_btn.style.display = 'block'
+                            }, 1000);
+                        }
+                    }else{
+                        error.innerHTML = "Username already exists";
+                        error_container.style.display = 'flex';
+                    }
+                }else{
+                    console.log('login is not valid');
+                    error_container.style.display = 'flex';
+                    error.innerHTML = "Please use only English letters and numbers";
+                }
+                
+                function validateInput(login) {
+                    const regexlogin = /^[a-zA-Z0-9]+$/;
+                    return regexlogin.test(login);
+                }
+            }
+
+        }
+        
+    </script>
+</body>
+</html>
+{% endblock content %}

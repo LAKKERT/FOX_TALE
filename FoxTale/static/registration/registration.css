@@ -1,0 +1,463 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    user-select: none;
+}
+
+@font-face {
+    font-family: K2D;
+    src: url(../fonts/K2D/K2D-Medium.ttf) format("truetype");
+
+}
+
+html, body {
+    font-family: K2D, sans-serif;
+    width: auto !important;
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+    background: black;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-text-fill-color: white ;
+    transition: background-color 0s 600000s, color 0s 600000s;
+}
+
+input:-internal-autofill-selected {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+:root {
+    --index: calc(1vw + 1vh);
+}
+
+.layer {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-size: cover;
+    background-position: center;
+    background: black;
+    background-image: url(../IMG/login/Login_BG.jpg);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: opacity 1s;
+    transition-duration: 1s;
+}
+
+.registration_container {
+    margin-top: 100px;
+}
+
+.label {
+    display: block;
+    text-align: center;
+
+    font-family: K2D, sans-serif;
+}
+
+.label h2 {
+    font-size: calc(var(--index) * 3);
+    color: #F5DEB3;
+    font-weight: bold;
+    -webkit-text-stroke: 0.001rem black;
+}
+
+.label p {
+    font-size: calc(var(--index) * 1.25);
+    color: #F5DEB3;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    margin-top: 25px;
+    -webkit-text-stroke: 0.05rem black;
+}
+
+.error_container {
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.error_container p{
+    font-family: K2D, sans-serif;
+    font-size: calc(var(--index) * .8);
+    letter-spacing: 4px;
+    color: #847354;
+}
+
+.registration_form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    margin-top: 0px;
+}
+
+.email_field {
+    width: 600px;
+    outline: none;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px solid #F5DEB3;
+    padding-bottom: 10px;
+
+    text-align: center;
+    text-shadow: 0 0 2px black;
+
+    font-family: K2D, sans-serif;
+    font-size: calc(var(--index) * 1.25);
+    color: #F5DEB3;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    margin-top: 25px;
+}
+
+.registration_form input[type=email]::placeholder {
+    text-shadow: 0 0 2px black;
+    color: #F5DEB3;
+}
+
+input[type=text]::placeholder, input[type=password]::placeholder {
+    text-shadow: 0 0 2px black;
+    color: #F5DEB3;
+}
+
+.button_container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.next_btn {
+    width: 250px;
+    height: 80px;
+
+    border: 3px solid #F5DEB3;
+    color: #F5DEB3;
+    padding: 13px 55px 13px 55px;
+
+    background-color: transparent;
+
+    font-family: K2D, sans-serif;
+    font-size: calc(var(--index) * 1.25);
+    font-weight: 300;
+    letter-spacing: 5px;
+    text-shadow: 0 0 2px black;
+
+    box-shadow: 0 0 2px black;
+
+    margin-top: 40px;
+
+    cursor: pointer;
+    transition-duration: .5s;
+}
+
+.next_btn:hover {
+    background-color: #8473541c;
+    transition-duration: .2s;
+}
+
+.registered {
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 40px;
+    font-family: K2D, sans-serif;
+    font-size: calc(var(--index) * .5);
+    font-weight: 300;
+    letter-spacing: 4px;
+}
+
+.registered p {
+    color: #847354;
+}
+
+.registered a {
+    color: #F5DEB3;
+    margin-left: 10px;
+    border-bottom: 2px;
+    text-decoration: none;
+    text-shadow: 0 0 2px black;
+}
+
+.registered a:hover {
+    border-bottom: solid #F5DEB3;
+    transition-duration: .5s;
+}
+
+.birth_day {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.birth_day select:not(:last-child) {
+    margin-right: 15px;
+}
+
+.custom_select {
+    width: 200px;
+    height: 65px;
+    flex-shrink: 0;
+    font-size: 16px;
+    border-radius: 1px;
+    border: 2px solid #FFE5B6;
+    background: rgba(23, 22, 18, 0.31);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+
+    color: #F5DEB3;
+    text-align: center;
+    font-family: K2D;
+    font-size: calc(var(--index) * .8);
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.custom_select_day {
+    width: 70px;
+    height: 65px;
+    flex-shrink: 0;
+    font-size: 16px;
+    border-radius: 1px;
+    border: 2px solid #FFE5B6;
+    background: rgba(23, 22, 18, 0.31);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+
+    color: #F5DEB3;
+    text-align: center;
+    font-family: K2D;
+    font-size: calc(var(--index) * .8);
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.custom_select_year {
+    width: 100px;
+    height: 65px;
+    flex-shrink: 0;
+    font-size: 16px;
+    border-radius: 1px;
+    border: 2px solid #FFE5B6;
+    background: rgba(23, 22, 18, 0.31);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+
+    color: #F5DEB3;
+    text-align: center;
+    font-family: K2D;
+    font-size: calc(var(--index) * .8);
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.custom_select:focus {
+    outline: #F5DEB3;
+}
+
+option {
+    background-color: transparent;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+.user_info {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+.user_field {
+    width: 600px;
+    outline: none;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px solid #F5DEB3;
+    padding-bottom: 10px;
+
+    text-align: center;
+    text-shadow: 0 0 2px black;
+
+    font-family: K2D, sans-serif;
+    font-size: calc(var(--index) * 1.25);
+    color: #F5DEB3;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    margin-top: 40px;
+}
+
+.appearance {
+    opacity: 0;
+    transition: 1s;
+}
+
+.full_info_container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.full_info {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    text-align: center;
+}
+
+.full_info p{
+    font-size: calc(var(--index) * 1.8);
+    text-shadow: 0 0 2px black;
+    color: #F5DEB3;
+    -webkit-text-stroke: 0.06rem black;
+}
+
+.full_info p:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 1024px) {
+    .layer {
+        background-image: url(../IMG/login/gradient_bg.png);
+    }
+
+    .login_form {
+        background-color: #5f4b3c6c;
+        border-radius: 8px;
+        padding: 20px;
+    }
+
+    .label h2 {
+        font-size: calc(var(--index) * 2);
+        -webkit-text-stroke: 0rem;
+    }
+
+    .label p {
+        font-size: calc(var(--index) * 1.5);
+        -webkit-text-stroke: 0rem;
+    }
+
+    .email_field {
+        font-size: calc(var(--index) * 2.25);
+    }
+
+    .registered {
+        font-size: calc(var(--index) * 1);
+    }
+
+    .custom_select {
+        font-size: calc(var(--index) * 1.2);
+    }
+    
+    .custom_select_day {
+        font-size: calc(var(--index) * 1.2);
+    }
+
+    .custom_select_year {
+        font-size: calc(var(--index) * 1.2);
+    }
+
+    .registered {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .registered p {
+        color: black;
+    }
+}
+
+@media (max-width: 700px) {
+    .login_form {
+        width: 300px;
+    }
+
+    .fields_container input[type=text] {
+        width: 250px;
+    }
+
+    .fields_container input[type=password] {
+        width: 250px;
+    }
+
+    .extra_links {
+        font-size: calc(var(--index) * 1.8);
+    }
+
+    .user_field {
+        width: 400px;
+    }
+
+    .email_field {
+        width: 400px;
+    }
+}
+
+@media (max-width: 450px) {
+    .birth_day {
+        flex-direction: column;
+    }
+
+    .birth_day select:not(:first-child){
+        margin-top: 15px;
+    }
+
+    .birth_day select:not(:last-child) {
+        margin-right: 0px;
+    }
+
+    .custom_select_year{
+        width: 200px;
+    }
+
+    .custom_select_day {
+        width: 200px;
+    }
+
+    .label h2 {
+        font-size: calc(var(--index) * 2.8);
+        -webkit-text-stroke: 0rem;
+    }
+    
+    .error_container p {
+        color: #F5DEB3;
+        font-size: calc(var(--index) * 1.5);
+        -webkit-text-stroke: 0rem;
+    }
+
+    .user_field {
+        width: 250px;
+    }
+
+    .email_field {
+        width: 250px;
+    }
+}

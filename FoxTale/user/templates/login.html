@@ -1,0 +1,35 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'login/login_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="layer">
+        <div class="login_form">
+            <form  method="POST" autocomplete="off">
+                {% csrf_token %}
+
+                <div class="fields_container">
+                    {{ form.username }}
+                    {{ form.password }}
+                </div>
+    
+                <div class="button_container" name="confirm">
+                    <button class="next_btn" type="submit">LOGIN</button>
+                </div>
+    
+                <div class="extra_links">
+                    <a class="link" href="{% url 'register' %}">CREATE ACCOUNT</a>
+                </div>
+            </form>
+        </div>
+</body>
+</html>
+{% endblock content %}

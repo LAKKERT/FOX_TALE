@@ -1,0 +1,87 @@
+{% extends "header.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'home/home_style.css' %}">
+    <title>HOME</title>
+</head>
+<body>
+    <section class="preview_video">
+        <video class="intro" id="LKAstudioV" autoplay="autoplay" preload="auto" no-controls autoplay playsinline muted>
+            <source src="{% static 'home/video/introduction_logo.mp4' %}">
+        </video> 
+    </section>
+
+    <section class="main_news">
+        <div class="title_news">
+            <p>- MAIN NEWS -</p>
+        </div>
+        <div class="news_container">
+                {% for new in news %}
+                <div class="frame">
+                    <div class="new_item">
+                        <div class="photo_new">
+                            <img src="{{ new.cover.url }}">
+                        </div>
+    
+                        <div class="title_new">
+                            <h2>{{ new.title }}</h2>
+                        </div>
+    
+                        <div class="discription_new">
+                            <p>{{ new.introduction_content }}</p>
+                        </div>
+    
+                        <div class="read_more">
+                            <a href="{% url 'detail_new' new.id %}">read more</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+        </div>
+        
+        <div class="more_news">
+            {% if user.is_authenticated %}
+                {% if user.is_staff or user.is_admin %}
+                    <a class="add_link" href="{% url 'add_new' %}">ADD NEWS |</a>
+                {% endif %}
+            {% endif %}
+            <a class="link_more" href="{% url 'news' %}">VIEW ALL •</a>
+        </div>
+    </section>
+
+    <section class="about_game">
+        <div class="content">
+            <div class="about_heading">
+                <p>THE FOX TEMPLE</p>
+            </div>
+            <div class="about_text">
+                <div class="left_text">
+                    <p>
+                        Fox Tale immerses you in the world of foxes and their exploits. You will assume the role of a lone little fox living in a fantastical setting.
+                        Your main objectives are to travel the world in search of food, to stay safe, and to learn more about your ancestors.
+                    </p>
+                </div>
+
+                <div class="right_text">
+                    <p>
+                        Numerous different animals can be encountered in the game. Each animal has distinctive qualities all its own. They can either facilitate or impede your adventures.
+                        There are also quests and puzzles in the world, to overcome which you must have the necessary skills and knowledge about the world around you.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="video_container">
+                <video class="about_background" src="{% static 'home/video/leaves.mp4' %}" no-controls autoplay loop playsinline muted  ></video>
+            </div>
+        </div>
+    </section>
+    
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'support_pages/list_of_chats.css' %}">
+    <title>Support</title>
+</head>
+<body>
+    <a style="color: black;" href="{% url 'completed_requests' %}">COMPLETED REQUESTS</a>
+    <main>
+        {% for sup in object_list %}
+            <p>{{ sup.id }}</p>
+            <a style="color: red;" href="{% url 'support_chat' sup.id %}">{{ sup.reason_title }}</a>
+            <p>{{ sup.status }}</p>
+        {% endfor %}
+    </main>
+</body>
+</html>
+{% endblock content %}

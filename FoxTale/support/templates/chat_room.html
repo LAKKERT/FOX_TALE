@@ -1,0 +1,95 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'support_pages/chat_page.css' %}">
+    <title>CHAT</title>
+</head>
+
+<body>
+    <div class="layer">
+        <main>
+            {% if user.is_authenticated %}
+                {% if user.is_staff or user.is_admin %}
+                <div class="participants_block">
+                    {% if listdetail.status == False %}
+                        <div class="close_button">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="close_btn">- CLOSE CHAT -</button>
+                            </form>
+                        </div>
+                    {% endif %}
+
+                    <div class="participants_list">
+                        <p class="participants_title">participants</p>
+                        {% for user in listUsers %}
+                        <p class="participants_username">{{ user }}</p>
+                        {% endfor %}
+                    </div>
+
+                </div>
+                {% endif %}
+            {% endif %}
+
+            <div class="chat_container">
+                <div class="chat_scroll">
+                    <div class="title">
+                        {{ listdetail.reason_title }}
+                        <div class="content_container">
+                            <p>{{ listdetail.problem }}</p>
+                        </div>
+                    </div>
+
+                    <div class="chat_screen">
+                        {% for message in messages %}
+                        <div class="message_container">
+                            <div class="username_container">
+                                <p>{{ message.sender }}</p>
+                            </div>
+
+                            <div class="content_container">
+                                <p>{{ message.content }}</p>
+                            </div>
+
+                            <div class="add_time">
+                                <p>{{ message.timestamp }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% if listdetail.status == False %}
+            <div class="message_fields">
+                <form class="message_form" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.content }}
+                    <button type="submit" class="send_btn">SEND</button>
+                </form>
+            </div>
+            {% endif %}
+
+            {% if listdetail.status == True %}
+            <div class="solved_message">
+                <p>Thank you for your question. We are happy to help you!
+                    If you have anymore questions or anything we can help you with,
+                    don't hesitate to contact us. We wish you a great day!
+                </p>
+
+                <p style="text-align: center;">
+                    🦊🦊🦊
+                </p>
+            </div>
+            {% endif %}
+        </main>
+    </div>
+</body>
+
+</html>
+{% endblock content %}

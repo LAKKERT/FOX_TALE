@@ -1,0 +1,43 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'news/news_list.css' %}">
+    <title>NEWS</title>
+</head>    
+<body>
+    <div class="layer">
+        <main>
+            <div class="introduction">
+                <h2>-NEWS-</h2>
+                <p>Here you can learn something new about FOX TALE</p>
+            </div>
+            <div class="main_content">
+                <div class="news_list">
+                    {% for new in object_list %}
+                    <a href="{% url 'detail_new' new.id %}">
+                        <div class="new_content">
+                            <div class="image_container">
+                                <img class="class_img"  src="{{ new.cover.url }}">
+                            </div>
+                            <div class="content_container">
+                                <div>
+                                    <p class="title">{{ new.title }}</p>
+                                    <p class="content">{{ new.introduction_content }}</p>
+                                    <p class="day_published">{{ new.date_add }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
+{% endblock content %}

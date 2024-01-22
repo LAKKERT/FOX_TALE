@@ -1,0 +1,63 @@
+{% extends "header.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'profile/profile.css' %}">
+    <title>Profile</title>
+</head>
+<body>
+    <div class="layer">
+        <div class="introduction_block">
+            <h2>WELCOME TO YUOR TEMPLE -{{ user.username }}-</h2>
+        </div>
+
+        <div class="main_content">
+            <div class="list_containers">
+                <div class="item_container">
+                    <div class="discription_block">
+                        <p>If you want to change your password, fill out the form</p>
+                    </div>
+
+                    <div class="change_password_block">
+                        <form method="POST" autocomplete="off">
+                            <p class="email_error">{{password_error}}</p>
+                            {% csrf_token %}
+                            {{ form_change_password.old_password }}
+                            {{ form_change_password.new_password1 }}
+                            {{ form_change_password.new_password2 }}
+                            <button class="button_save" type="submit">SAVE CHANGES</button>
+                        </form>
+                    </div>
+                </div>
+    
+                <div class="item_container">
+                    <div class="discription_block">
+                        <p>This is your personal information</p>
+                    </div>
+    
+                    <div class="change_password_block">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <p class="email_error">{{email_error}}</p>
+                            <div class="date_birth">
+                                <p>{{user_profile.month}} {{ user_profile.day }} {{ user_profile.year }}</p>                                                                                                                                      
+                            </div>
+                            {{ form_change_email.new_email }}
+                            
+                            {% if email_exist_error %}
+                                <p>{{ email_exist_error }}</p>
+                            {% endif %}
+                            <button class="button_save" type="submit">SAVE CHANGES</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock content %}

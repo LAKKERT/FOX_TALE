@@ -1,0 +1,268 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+
+    user-select: none;
+
+    transition-duration: .5s;
+
+}
+
+:root {
+    --index: calc(1vw + 1vh);
+}
+
+@font-face {
+    font-family: K2D;
+    src: url(../fonts/K2D/K2D-Medium.ttf) format("truetype");
+
+}
+
+html, body {
+    font-family: K2D, sans-serif;
+}
+
+body {
+    padding: 0;
+}
+
+
+
+.layer {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-image: url(../IMG/news/news_page/blue.png);
+
+    transition: opacity 1s;
+    transition-duration: 1s;
+
+    padding: 50px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    max-width: 1920px;
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+.introduction {
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    margin-top: 50px;
+
+    /* box-shadow: inset 0px 850px 500px -500px #000; */
+    
+    background-position: center;
+    background-size: cover;
+    background-image: url('/static/IMG/news/news_page/news_detail.png');
+    /* background-image: linear-gradient(black, white); */
+}
+
+.introduction h2 {
+    font-weight: bold;
+    font-size: calc(var(--index) * 2.5);
+    letter-spacing: 4px;
+
+    text-align: center;
+    text-wrap: balance;
+    margin-bottom: 10px;
+
+    color: #F5DEB3;
+    text-shadow: 0 0 1px black;
+}
+
+.introduction p {
+    font-weight: lighter;
+    font-size: calc(var(--index) * 1.2);
+    letter-spacing: 2px;
+    text-wrap: balance;
+    text-transform: uppercase;
+
+    color: #F5DEB3;
+    text-shadow: 0 0 1px black;
+
+    margin-bottom: 50px;
+}
+
+.main_content {
+    display: flex;
+
+    margin-top: 60px;
+    padding: 0 5%;
+}
+
+.news_list {
+    display: flex;
+    flex-direction: column;
+}
+
+.new_content {
+    display: flex;
+    flex-direction: row;
+}
+
+.news_list a:not(:last-child) {
+    margin-bottom: 50px;
+}
+
+.news_list a:hover .image_container {
+    scale: 110%;
+}
+
+.image_container img {
+    width: 450px;
+    height: 250px;
+}
+
+.image_container {
+    width: 450px;
+    height: 250px;
+
+    margin-right: 50px;
+}
+
+.image_container img {
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.content_container {
+    width: auto;
+    height: 250px;
+
+    display: flex;
+    justify-content: left;
+    align-items: center;
+
+    padding: 10px;
+}
+
+.title {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-size: calc(var(--index) * 1.2);
+    text-wrap: balance;
+    font-weight: 600;
+    text-transform: uppercase;
+
+
+    color: #F5DEB3;
+    text-shadow: 0 0 1px black;
+
+    margin-bottom: 15px;
+}
+
+.content {
+    font-size: 20px;
+    letter-spacing: 2px;
+    font-weight: 200;
+    text-transform: uppercase;
+    text-wrap: wrap;
+    color: black;
+    text-shadow: 0 0 1px black;
+
+}
+
+.day_published {
+    font-size: 14px;
+    margin-top: 15px;
+    color: black;
+    text-shadow: 0 0 1px #F5DEB3;
+}
+
+.extra_links {
+    /* position: fixed;
+    left: 1263px; */
+    width: 100%;
+    height: 600px;
+    border-left: 4px solid coral;
+}
+
+@media (max-width: 1500px) {
+    .introduction {
+        background-image: none;
+    }
+}
+
+@media (max-width: 1250px) {
+    .title {
+        font-size: 20px;
+    }
+    
+    .content {
+        font-size: 14px;
+        letter-spacing: 2px;
+    }
+
+    .extra_links {
+        display: none;
+    }
+}
+
+@media(max-width: 900px) {
+    .title {
+        font-size: 15px;
+    }
+    .content {
+        font-size: 12px;
+    }
+
+    .image_container img {
+        width: 350px;
+        height: 250px;
+    }
+}
+
+@media(max-width: 750px) {
+    .introduction p {
+        text-align: center;
+    }
+
+    .image_container {
+        display: none;
+    }
+
+    .title {
+        justify-content: center;
+        font-size: calc(var(--index) * 1.2);
+    }
+
+    .content {
+        font-size: calc(var(--index) * .9);
+    }
+}
+
+@media(max-width: 750px) {
+    .introduction {
+        height: 300px;
+    }
+
+    .introduction p, a {
+        text-align: center;
+        font-size: 25px;
+    }
+
+    .title {
+        justify-content: center;
+        font-size: calc(var(--index) * 1.5);
+    }
+
+    .content {
+        font-size: calc(var(--index) * 1.1);
+    }
+}

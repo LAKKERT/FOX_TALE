@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'header/header_style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <title>Header</title>
+</head>
+<body>
+<header>
+        <nav>
+            <div class="introduction_logo">
+                <a class="full_logo" href="{% url 'home' %}"><img src="{% static 'img/header/fox-tail Logo text WHITE.png' %}" alt="Logo" height="80"></a>
+                <a class="mobile_logo" href="{% url 'home' %}"><img src="{% static 'img/header/Title_logo.png' %}" alt="Logo" height="80"></a>
+            </div>
+
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <i class="fas fa-bars"></i>
+            </label>
+            <div class="links_container">
+                <a href="{% url 'news' %}">
+                    <div class="link">
+                        <div class="outline">
+                            NEWS
+                        </div>
+                    </div>
+                </a>
+
+                <a href="{% url 'create_chat' %}" class="text-decoration-none">
+                    <div class="link">
+                        <div class="outline">
+                            SUPPORT
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="text-decoration-none">
+                    <div class="link">
+                        <div class="outline">
+                            UNIVERS
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="text-decoration-none">
+                    <div class="link">
+                        <div class="outline">
+                            ADDITIONAL
+                        </div>
+                    </div>
+                </a>
+                {% if user.is_authenticated %}
+                <div class="authenticated">
+                    <button onclick="dropDownFunc()" class="username">{{ user.get_username }}</button>
+                    <div id="UserDropDown" class="dropdown_content">
+                        <a href="{% url 'profile' %}">PROFILE</a>
+                        <a href="{% url 'logout' %}">LOGOUT</a>
+                    </div>
+                </div>
+                {% else %}
+                    <div class="registration">
+                        <a class="text-decoration-none" href="{% url 'register' %}"><div class="button_regist">REGISTRATION</div></a>
+                        <a class="text-decoration-none" href="{% url 'login' %}"><div class="button_login">LOGIN</div></a>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="text_block"></div>
+        </nav>
+        <script>
+            function dropDownFunc() {
+              document.getElementById("UserDropDown").classList.toggle("show");
+            }
+            
+            window.onclick = function(event) {
+              if (!event.target.matches('.username')) {
+                var dropdowns = document.getElementsByClassName("dropdown_content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+              }
+            }
+        </script>
+    </header>
+
+    {% block content %}
+
+    {% endblock content %}
+
+    <footer>
+        <div class="footer_container">
+            <div class="img_container">
+                <a href="{% url 'home' %}"><img src="{% static 'img/header/Title_logo.png' %}"></a>
+            </div>
+            <div class="extra_footer_links">
+                <a href="">END USER AGREEMENT</a>
+                <a href="">USE OF CONFIDENTIAL DATA</a>
+                <a href="">CONDITIONS OF USE</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

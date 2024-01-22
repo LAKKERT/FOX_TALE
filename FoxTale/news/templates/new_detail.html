@@ -1,0 +1,76 @@
+{% extends "header.html" %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'news/news_detail.css' %}">
+    <title>document</title>
+</head>
+<body>
+    <div class="layer">
+        <main>
+            <section class="introduction_new">
+                <div class="introduction_content">
+                    <div class="title_detail">
+                        <h1>-{{ newsDetail.title }}-</h1>
+                        <p>{{ newsDetail.introduction_content }}</p>
+                        <div class="bottom_section">
+                            <p>{{ newsDetail.date_add }}</p>
+                            <div class="options">
+                                {% if user.is_authenticated %}
+                                    {% if user.is_staff or user.is_admin %}
+                                        <a class="buttons" onclick="Delete_fun()">DELETE |</a>
+                                        <a class="buttons" style="margin-right: 15px;" href="{% url 'new_update' newsDetail.pk %}">EDIT•</a>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <div style="display: none;" id="delete_post" class="delete_post">
+                <form class="delete_post_form" method="POST" action="{% url 'detail_new' pk=newsDetail.pk %}">
+                    {% csrf_token %}
+                    <p class="delete_text">Are you sure you want to delete the new "{{ newsDetail.title }}"?</p>
+                    <div class="buttons_container">
+                        <button class="delete_buttons" name="delete" type="submit">YES</button>
+                        <a class="back_link" onclick="close_delete_window()" id="close_delete_window">NO</a>
+                    </div>
+                </form>
+            </div>
+    
+            <div class="lower_container">
+                <img src="{% static 'IMG/News_detail/detail_new/lower_gold.png' %}">
+            </div>
+    
+            <section class="main_content">
+                <div class="Paragraph_title">
+                    <h2>{{ newsDetail.Paragraph_title }}</h2>
+                </div>
+                
+                <div class="content">
+                    <p>{{ newsDetail.content }}</p>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
+
+<script>
+    function Delete_fun() {
+        delete_form = document.getElementById('delete_post');
+        delete_form.style.display = 'flex';
+    }
+
+    function close_delete_window() {
+        close_window = document.getElementById('delete_post');
+        close_window.style.display = 'none';
+    }
+</script>
+{% endblock content %}

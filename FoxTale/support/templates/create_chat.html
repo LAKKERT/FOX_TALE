@@ -1,0 +1,58 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'support_pages/create_chat.css' %}">
+    <title>Support</title>
+</head>
+
+<body>
+    <div class="layer">
+        {% if user.is_authenticated %}
+            <main>
+                <div class="requests_lists">
+                    <a  href="{% url 'user_requests' %}">•MY REQUESTS</a>
+            
+                    {% if user.is_authenticated %}
+                        {% if user.is_staff or user.is_admin %}
+                            <a href="{% url 'support_list' %}"> •ALL REQUESTS</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+        
+                <form class="create_chat_form" method="POST">
+                    {% csrf_token %}
+                    <div class="greating_text">
+                        <p>Hello, if you need help, post the reason and describe the problem</p>
+                    </div>
+                    {% if error %}
+                        <p>Please fill in the field</p>
+                    {% endif %}
+                    {{ form.reason_title }}
+                    {{ form.problem }}
+                    <button class="submit_button" type="submit">Create</button>
+                </form>
+            </main>
+
+            {% else %}
+                <div class="error_message_container">
+                    <p class="error_message">
+                        Sorry for the inconvenience, but authorization is required to leave a request. Please log in to your account or register
+                    </p>
+                    <div class="buttons_container">
+                        <a class="error_link" style="margin-right: 20px;" href="{% url 'login' %}">LOG IN</a>
+                        <a class="error_link" href="{% url 'register' %}">SIGN UP</a>
+                    </div>
+                </div>
+
+        {% endif %}
+    </div>
+</body>
+
+</html>
+{% endblock content %}

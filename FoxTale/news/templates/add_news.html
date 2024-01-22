@@ -1,0 +1,52 @@
+{% extends "header.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static 'news/news_add.css' %}">
+        <title>NEWS</title>
+    </head>   
+    <body class="add_news_body">
+        <div class="moon_container">
+            <img class="moon_img" src="{% static 'img/News_detail/moon.png' %}">
+        </div>
+
+        <div class="add_content_container">
+            <form id="form" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div style="display: none;">
+                    {{ form.date_add }}
+                </div>
+                
+                <div class="introduction_new">
+                    {{ form.title }}
+                    <img class="underline_img" src="{% static 'img/News_detail/emphasize/emphasize.png' %}" alt="underline">
+                </div>
+
+                <div class="introduction_content">
+                    {{ form.introduction_content }}
+                </div>
+    
+                <div class="file_container">
+                    <label class="file_button" for="file-upload">CHOOSE FILE</label>
+                    {{ form.cover }}
+                </div>
+                
+                <div class="Paragraph_title_container">
+                    {{ form.Paragraph_title }}
+                </div>
+
+                <div class="content">
+                    {{ form.content }}
+                </div>
+           
+                <input type="submit" name="submit" value="submit"> 
+            </form>
+        </div>
+    </body>
+</html>
+{% endblock content %}
