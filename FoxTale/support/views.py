@@ -3,6 +3,7 @@ from .forms import *
 from .models import *
 from django.contrib.auth.models import User
 from django.views.generic import DetailView, ListView, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponse
 from django.views import View
 # Create your views here.
@@ -75,9 +76,13 @@ def ChatRoomDetailView(request, pk):
     return render(request, 'chat_room.html', {'form': form, 'messages': messages ,'listdetail': listdetail, 'listUsers': listUsersNames})
 
     
-class ChatListView(ListView):
-    model = SupportModel
-    template_name = 'list_of_chats.html'
+class ChatListView(UserPassesTestMixin, View):
+    def get(self, request):
+        uncompleted = SupportModel.objects.filter(status=False).order_by('-pk')
+        return render(request, 'list_of_chats.html', {'uncompleted': uncompleted})
+    
+    def test_func(self):
+        return self.request.user.is_staff
 
 class UsersRequests(View):
     def get(self, request):
@@ -88,10 +93,13 @@ class UsersRequests(View):
         else:
             return redirect('home')
 
-class CompletedRequests(View):
+class CompletedRequests(UserPassesTestMixin, View):
     def get(self, request):
         if request.user.is_authenticated:
-            completed_requests = SupportModel.objects.filter(status=True)
+            completed_requests = SupportModel.objects.filter(status=True).order_by('-pk')
             return render(request, 'completed_requests.html', {'completed_requests': completed_requests})
         else:
             return redirect('home')
+        
+    def test_func(self):
+        return self.request.user.is_staff

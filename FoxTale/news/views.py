@@ -13,8 +13,6 @@ class NewsView(ListView):
     template_name = 'news.html'
     ordering = ['-date_add']
 
-# def is_staff(user):
-#     return user.is_authenticated and user.is_staff
 
 class NewsDetailView(View):
 

@@ -343,6 +343,43 @@ nav ul li {
     margin-top: 20px;
 }
 
+
+.dropdown_add_content {
+    display: none;
+    min-width: auto;
+    width: 230px;
+    text-align: left;
+    position: absolute;
+    right: 345px;
+    top: 96px;
+    background-color: black;
+    overflow: auto;
+    padding: 0 20px 25px 20px;
+    border-top: 4px solid #C2724F;
+    border-radius: 0 0 0 5px;
+    z-index: 1;
+}
+
+.dropdown_add_content a {
+    height: 52px;
+    font-size: calc(var(--index) * .8);
+    color: white;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+    transition-duration: .5s;
+    border-radius: 5px;
+}
+
+.dropdown_add_content a:hover {
+    background-color: #C2724F;
+    transition-duration: .2s;
+}
+
+.dropdown_add_content a{
+    margin-top: 20px;
+}
+
 .show {display: block;}
 
 .username {
@@ -470,6 +507,20 @@ nav ul li {
         width: 100%;
         top: 45px;
         right: 1px;
+    }
+
+    .dropdown_add_content {
+        margin-top: 13px;
+        text-align: center;
+        background-color: transparent;
+        width: 100%;
+        top: 45px;
+        right: 1px;
+    }
+
+    .dropdown_add_content a {
+        font-size: calc(var(--index) * 1.8);
+        padding: 5px 15px;
     }
 
     .dropdown_content a {

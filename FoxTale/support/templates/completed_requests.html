@@ -6,14 +6,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'support_pages/user_requests.css' %}">
     <title>completed requests</title>
 </head>
 <body>
-    <main>
-        {% for item in completed_requests %}
-            <a style="color: black;" href="{% url 'support_chat' item.pk %}">{{ item.id }}</a>
-        {% endfor %}
-    </main>
+    <div class="layer">
+        <div class="completed_link">
+            <a href="{% url 'support_list' %}">-> UNCOMPLETED REQUESTS</a>
+        </div>
+        <div class="introduction">
+            <p>THESE ARE SOLVED QUERIES</p>
+        </div>
+        <div class="list_requests">
+            <p class="list_item">ID</p>
+            <p class="list_item">AUTHOR</p>
+            <p class="list_item">REASON TITLE</p>
+            <p class="list_item">STATUS</p>
+            {% for item in completed_requests %}
+                <a class="list_item_link" href="{% url 'support_chat' item.pk %}"># {{ item.id }}</a>
+                <p class="list_item">{{ item.author }}</p>
+                <p class="list_item">{{ item.reason_title }}</p>
+                <p class="list_item">
+                    {% if item.status == False %}
+                        Unsolved
+                    {% else %}
+                        Solved
+                    {% endif %}
+                </p>
+            {% endfor %}
+        </div>
+    </div>
 </body>
 </html>
 {% endblock content %}

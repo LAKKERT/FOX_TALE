@@ -6,18 +6,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'support_pages/list_of_chats.css' %}">
+    <link rel="stylesheet" href="{% static 'support_pages/user_requests.css' %}">
     <title>Support</title>
 </head>
 <body>
-    <a style="color: black;" href="{% url 'completed_requests' %}">COMPLETED REQUESTS</a>
-    <main>
-        {% for sup in object_list %}
-            <p>{{ sup.id }}</p>
-            <a style="color: red;" href="{% url 'support_chat' sup.id %}">{{ sup.reason_title }}</a>
-            <p>{{ sup.status }}</p>
-        {% endfor %}
-    </main>
+    <div class="layer">
+        <div class="completed_link">
+            <a href="{% url 'completed_requests' %}">-> COMPLETED REQUESTS</a>
+        </div>
+        <div class="introduction">
+            <p>THESE ARE UNRESOLVED QUERIES</p>
+        </div>
+        <div class="list_requests">
+            <p class="list_item">ID</p>
+            <p class="list_item">AUTHOR</p>
+            <p class="list_item">REASON TITLE</p>
+            <p class="list_item">STATUS</p>
+            {% for item in uncompleted %}
+                <a class="list_item_link" href="{% url 'support_chat' item.pk %}"># {{ item.id }}</a>
+                <p class="list_item">{{ item.author }}</p>
+                <p class="list_item">{{ item.reason_title }}</p>
+                <p class="list_item">
+                    {% if item.status == False %}
+                        Unsolved
+                    {% else %}
+                        Solved
+                    {% endif %}
+                </p>
+            {% endfor %}
+        </div>
+    </div>
 </body>
 </html>
 {% endblock content %}

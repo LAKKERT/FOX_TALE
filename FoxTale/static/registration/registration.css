@@ -65,7 +65,7 @@ input:-internal-autofill-selected {
 }
 
 .label h2 {
-    font-size: calc(var(--index) * 3);
+    font-size: calc(var(--index) * 2);
     color: #F5DEB3;
     font-weight: bold;
     -webkit-text-stroke: 0.001rem black;
@@ -323,6 +323,7 @@ select::-ms-expand {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    margin-top: 20px;
 }
 
 .full_info {
@@ -333,7 +334,7 @@ select::-ms-expand {
 }
 
 .full_info p{
-    font-size: calc(var(--index) * 1.8);
+    font-size: calc(var(--index) * 1.5);
     text-shadow: 0 0 2px black;
     color: #F5DEB3;
     -webkit-text-stroke: 0.06rem black;

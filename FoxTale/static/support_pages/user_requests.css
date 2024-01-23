@@ -52,6 +52,12 @@ html {
     font-size: 40px;
 }
 
+.introduction {
+    font-size: 40px;
+    color: white;
+    margin-top: 15px;
+}
+
 .list_requests {
     display: grid;
     width: 80%;
@@ -81,4 +87,24 @@ html {
 
 footer {
     display: none;
+}
+
+.completed_link {
+    display: flex;
+    justify-content: end;
+    padding: 0 10%;
+    width: 100%;
+}
+
+.completed_link a{
+    font-size: 20px;
+    color: white;
+    text-shadow: 0 0 1px black;
+    transition-duration: .5s;
+    font-weight: 900;
+}
+
+.completed_link a:hover {
+    color: #F5DEB3;
+    transition-duration: .5s;
 }

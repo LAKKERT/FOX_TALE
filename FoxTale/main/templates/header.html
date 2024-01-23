@@ -53,6 +53,7 @@
                         </div>
                     </div>
                 </a>
+
                 {% if user.is_authenticated %}
                 <div class="authenticated">
                     <button onclick="dropDownFunc()" class="username">{{ user.get_username }}</button>
@@ -72,21 +73,24 @@
         </nav>
         <script>
             function dropDownFunc() {
-              document.getElementById("UserDropDown").classList.toggle("show");
+                document.getElementById("UserDropDown").classList.toggle("show");
             }
+
             
             window.onclick = function(event) {
-              if (!event.target.matches('.username')) {
-                var dropdowns = document.getElementsByClassName("dropdown_content");
-                var i;
+            if (!event.target.matches('.username')) {
+                let dropdowns = document.getElementsByClassName("dropdown_content");
+                let i;
                 for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
+                    let openDropdown = dropdowns[i];
                     if (openDropdown.classList.contains('show')) {
                         openDropdown.classList.remove('show');
+                        }
                     }
                 }
-              }
             }
+
+            
         </script>
     </header>
 
