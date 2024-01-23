@@ -23,7 +23,8 @@ class RegistrationUserView(View):
         if request.user.is_authenticated:
             raise Http404()
         form = UserRegistrationForm()
-        return render(request, 'registration.html', {'form':form})
+        user = User.objects.all()
+        return render(request, 'registration.html', {'form':form, 'objects':user})
     
     def post(self, request):
         if request.user.is_authenticated:
